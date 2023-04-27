@@ -2,9 +2,7 @@ import type { NextPage } from "next";
 import Head from "next/head";
 import { useRef, useState, useEffect } from "react";
 import { Toaster } from "react-hot-toast";
-import Footer from "../components/Footer";
 import LoadingDots from "../components/LoadingDots";
-import ReactMarkdown from "react-markdown";
 
 const Home: NextPage = () => {
   const [loading, setLoading] = useState(false);
@@ -91,7 +89,7 @@ const Home: NextPage = () => {
   return (
     <div className="flex max-w-5xl mx-auto flex-col items-center justify-center py-2 min-h-screen">
       <Head>
-        <title>Jst Ideas</title>
+        <title>Jst Web</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
@@ -128,41 +126,10 @@ const Home: NextPage = () => {
       </div>
       <main className="flex flex-1 w-full flex-col items-center justify-center text-center px-4 mt-12 sm:text sm:mt-20">
         <h1 className="sm:text-9xl text-[#efece6] text-7xl max-w-[708px] font-bold">
-          Jst Ideas
+          Jst Web
         </h1>
         <div className="max-w-xl w-full">
-          <div className="flex mt-5 items-center space-x-1">
-            <p className="text-center w-full text-[#efece6] font-medium">
-              <p className="text-lg">N&W has begun, welcome to S3 dear folks</p>
-              Check if your idea worth it, add your OpenAI key above and tell us
-              what your idea is right here 👇!
-            </p>
-          </div>
-          <div className="p-1.5 gap-1 mt-5 rounded-full text-[#efece6] py-2 border border-solid border-[#00000033] rounded-full bg-[#333] shadow-[inset_0_1px_0_0_rgb(255,255,255,10%)] flex">
-            <input
-              value={bio}
-              onChange={(e) => setBio(e.target.value)}
-              className="w-full text-[#efece6] placeholder:text-[#aaa] bg-transparent px-3 py-2 rounded-full focus:outline-none focus:border-sky-500"
-              placeholder={"Roast Me"}
-            />
-
-            {!loading && (
-              <button
-                className="bg-[#222] shadow-[inset_0_2px_0_0_rgb(255,255,255,10%)] border border-[#000] rounded-full text-white font-medium px-4 py-2 hover:bg-[#222] w-fit"
-                onClick={(e) => generateBio(e)}
-              >
-                Roast
-              </button>
-            )}
-            {loading && (
-              <button
-                className="bg-[#222] shadow-[inset_0_2px_0_0_rgb(255,255,255,10%)] border border-[#000] rounded-full text-white font-medium px-4 py-2 hover:bg-[#222] w-fit"
-                disabled
-              >
-                <LoadingDots color="white" style="large" />
-              </button>
-            )}
-          </div>
+          <div className="flex mt-5 items-center space-x-1"></div>
         </div>
         <Toaster
           position="top-center"
@@ -173,26 +140,41 @@ const Home: NextPage = () => {
         <div className="space-y-10 my-5">
           {generatedBios && (
             <>
-              <div className="space-y-8 flex flex-col bg-[#ffffff0a] p-8 rounded-2xl text-[#ffffffcc] items-center justify-center max-w-xl mx-auto">
-                {generatedBios
-                  .substring(generatedBios.indexOf("1"))
-                  .split("____")
-                  .map((generatedBio) => {
-                    return (
-                      <div
-                        className="text-[#efece6] font-medium transition"
-                        key={generatedBio}
-                      >
-                        <ReactMarkdown>{generatedBio}</ReactMarkdown>
-                      </div>
-                    );
-                  })}
-              </div>
+              <div
+                className="space-y-8 flex flex-col bg-[#ffffff0a] p-8 rounded-2xl text-[#ffffffcc] items-center justify-center max-w-xl mx-auto"
+                dangerouslySetInnerHTML={{ __html: generatedBios.toString() }}
+              ></div>
             </>
           )}
         </div>
       </main>
-      <Footer />
+      <footer className="fixed min-w-[50%] bottom-0 flex justify-center pb-2">
+        <div className="p-1.5 w-full gap-1 mt-5 rounded-full text-[#efece6] py-2 border border-solid border-[#00000033] rounded-full bg-[#333] shadow-[inset_0_1px_0_0_rgb(255,255,255,10%)] flex">
+          <input
+            value={bio}
+            onChange={(e) => setBio(e.target.value)}
+            className="w-full text-[#efece6] placeholder:text-[#aaa] bg-transparent px-3 py-2 rounded-full focus:outline-none focus:border-sky-500"
+            placeholder={"Roast Me"}
+          />
+
+          {!loading && (
+            <button
+              className="bg-[#222] shadow-[inset_0_2px_0_0_rgb(255,255,255,10%)] border border-[#000] rounded-full text-white font-medium px-4 py-2 hover:bg-[#222] w-fit"
+              onClick={(e) => generateBio(e)}
+            >
+              Roast
+            </button>
+          )}
+          {loading && (
+            <button
+              className="bg-[#222] shadow-[inset_0_2px_0_0_rgb(255,255,255,10%)] border border-[#000] rounded-full text-white font-medium px-4 py-2 hover:bg-[#222] w-fit"
+              disabled
+            >
+              <LoadingDots color="white" style="large" />
+            </button>
+          )}
+        </div>
+      </footer>
     </div>
   );
 };
