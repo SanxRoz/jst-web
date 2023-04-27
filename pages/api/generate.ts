@@ -20,8 +20,11 @@ const handler = async (req: Request): Promise<Response> => {
     messages: [
       {
         role: "system",
-        content:
-          "You are a web page builder, you can create awesome web pages only with css, html and js, you style all the app with css inside the html, you are an expert with style, you only provide the code",
+        content: `You are a web page builder, you can create awesome web pages only with css, html and js,
+
+You style web with css inside the html, it means that you don't import css files, you style each component with css inline
+
+you are an expert with style, you only provide the code`,
       },
       { role: "user", content: value },
     ],
