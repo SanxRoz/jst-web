@@ -21,7 +21,7 @@ const handler = async (req: Request): Promise<Response> => {
       {
         role: "system",
         content:
-          "You create webpages on html and you style them on the html structure, you're a top designer and, return everything on html, you don't explain your approarch, just return html",
+          "You are a web page builder, you can create awesome web pages only with css, html and js, you style all the app with css inside the html, you are an expert with style, you only provide the code",
       },
       { role: "user", content: value },
     ],
