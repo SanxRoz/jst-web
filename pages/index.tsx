@@ -140,10 +140,12 @@ const Home: NextPage = () => {
         <div className="space-y-10 my-5">
           {generatedBios && (
             <>
-              <div
-                className="space-y-8 flex flex-col bg-[#ffffff0a] p-8 rounded-2xl text-[#ffffffcc] items-center justify-center max-w-xl mx-auto"
-                dangerouslySetInnerHTML={{ __html: generatedBios.toString() }}
-              ></div>
+              <div id="generated-bios">
+                <div
+                  className="space-y-8 flex flex-col bg-[#ffffff0a] p-8 rounded-2xl text-[#ffffffcc] items-center justify-center max-w-xl mx-auto"
+                  dangerouslySetInnerHTML={{ __html: generatedBios.toString() }}
+                ></div>
+              </div>
             </>
           )}
         </div>
