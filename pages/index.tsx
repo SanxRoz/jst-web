@@ -96,7 +96,7 @@ const Home: NextPage = () => {
       <div>
         {!showInput && (
           <button
-            className="px-5 text-[#efece6] py-2 border border-solid border-[#00000033] rounded-full bg-[#ffffff26] shadow-[inset_0_1px_0_0_rgb(255,255,255,10%)] hover:shadow-2xl"
+            className="fixed px-5 text-[#efece6] py-2 border border-solid border-[#00000033] rounded-full bg-[#ffffff26] shadow-[inset_0_1px_0_0_rgb(255,255,255,10%)] hover:shadow-2xl"
             onClick={handleButtonClick}
           >
             OpenAI Key
