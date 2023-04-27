@@ -80,6 +80,7 @@ const Home: NextPage = () => {
       const { value, done: doneReading } = await reader.read();
       done = doneReading;
       const chunkValue = decoder.decode(value);
+      console.log(chunkValue)
       setGeneratedBios((prev) => prev + chunkValue);
     }
     scrollToBios();
@@ -139,14 +140,10 @@ const Home: NextPage = () => {
         <hr className="h-px bg-gray-700 border-1 dark:bg-gray-700" />
         <div className="space-y-10 my-5">
           {generatedBios && (
-            <>
-              <div id="generated-bios">
-                <div
-                  className="space-y-8 flex flex-col bg-[#ffffff0a] p-8 rounded-2xl text-[#ffffffcc] items-center justify-center max-w-xl mx-auto"
-                  dangerouslySetInnerHTML={{ __html: generatedBios.toString() }}
-                ></div>
-              </div>
-            </>
+            <div
+              className="space-y-8 flex flex-col bg-[#ffffff0a] p-8 rounded-2xl text-[#ffffffcc] items-center justify-center max-w-xl mx-auto"
+              dangerouslySetInnerHTML={{ __html: generatedBios.toString() }}
+            ></div>
           )}
         </div>
       </main>
