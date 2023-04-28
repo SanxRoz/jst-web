@@ -164,6 +164,7 @@ const Home: NextPage = () => {
                   generatedBios.indexOf("```") + 3,
                   generatedBios.indexOf("```", generatedBios.indexOf("```") + 1)
                 )}
+                scrolling="no"
               />
             </>
           )}
