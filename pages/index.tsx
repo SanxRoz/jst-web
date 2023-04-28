@@ -146,17 +146,11 @@ const Home: NextPage = () => {
           toastOptions={{ duration: 2000 }}
         />
         <hr className="h-px bg-gray-700 border-1 dark:bg-gray-700" />
-        <div className="w-full space-y-10 my-5">
+        <div className="w-[60%] space-y-10 my-5">
           {generatedBios && (
             <>
-              <iframe
-                className="w-full h-screen bg-[#d7d6d3] p-8 rounded-2xl"
-                srcDoc={generatedBios.substring(
-                  generatedBios.indexOf("```") + 3,
-                  generatedBios.indexOf("```", generatedBios.indexOf("```") + 1)
-                )}
-              />
               <button
+                className="bg-[#FD330A] shadow-[inset_0_2px_0_0_rgb(255,255,255,10%)] border border-[#B62002] rounded-full text-white font-medium px-4 py-2 w-full"
                 onClick={() => {
                   navigator.clipboard.writeText(generatedBios.toString());
                   toast("Copied to clipboard");
@@ -164,6 +158,13 @@ const Home: NextPage = () => {
               >
                 Copy
               </button>
+              <iframe
+                className="w-full h-screen bg-[#d7d6d3] p-8 rounded-2xl"
+                srcDoc={generatedBios.substring(
+                  generatedBios.indexOf("```") + 3,
+                  generatedBios.indexOf("```", generatedBios.indexOf("```") + 1)
+                )}
+              />
             </>
           )}
         </div>
