@@ -1,8 +1,9 @@
 import type { NextPage } from "next";
 import Head from "next/head";
 import { useRef, useState, useEffect } from "react";
-import { Toaster } from "react-hot-toast";
+import { Toaster, toast } from "react-hot-toast";
 import LoadingDots from "../components/LoadingDots";
+import Image from "next/image";
 
 const Home: NextPage = () => {
   const [loading, setLoading] = useState(false);
@@ -98,7 +99,7 @@ const Home: NextPage = () => {
       <div className="fixed top-0 py-2">
         {!showInput && (
           <button
-            className="px-5 text-[#efece6] py-2 border border-solid border-[#00000033] rounded-full bg-[#ffffff26] shadow-[inset_0_1px_0_0_rgb(255,255,255,10%)] hover:shadow-2xl"
+            className="px-5 text-[#d7d6d3] py-2 border border-solid border-[#00000033] rounded-full bg-[#ffffff26] shadow-[inset_0_1px_0_0_rgb(255,255,255,10%)] hover:shadow-2xl"
             onClick={handleButtonClick}
           >
             OpenAI Key
@@ -106,11 +107,11 @@ const Home: NextPage = () => {
         )}
         {showInput && (
           <form
-            className="p-1.5 gap-1 rounded-full text-[#efece6] py-2 border border-solid border-[#00000033] rounded-full bg-[#ffffff26] shadow-[inset_0_1px_0_0_rgb(255,255,255,10%)] flex"
+            className="p-1.5 gap-1 rounded-full text-[#d7d6d3] py-2 border border-solid border-[#00000033] rounded-full bg-[#ffffff26] shadow-[inset_0_1px_0_0_rgb(255,255,255,10%)] flex"
             onSubmit={handleSubmit}
           >
             <input
-              className="w-full border-0 text-[#efece6] placeholder:text-[#aaa] bg-transparent px-3 py-2 rounded-full focus:outline-none focus:border-0"
+              className="w-full border-0 text-[#d7d6d3] placeholder:text-[#aaa] bg-transparent px-3 py-2 rounded-full focus:outline-none focus:border-0"
               id="input"
               type="password"
               value={inputValue}
@@ -118,7 +119,7 @@ const Home: NextPage = () => {
               placeholder={"Enter OpenAI key"}
             />
             <button
-              className="bg-[#222] shadow-[inset_0_1px_0_0_rgb(255,255,255,10%)] border border-[#000] rounded-full text-white font-medium px-4 py-2 hover:bg-[#222] w-fit"
+              className="bg-[#FD330A] shadow-[inset_0_1px_0_0_rgb(255,255,255,10%)] border border-[#B62002] rounded-full text-white font-medium px-4 py-2 hover:bg-[#FD330A] w-fit"
               type="submit"
             >
               Save
@@ -127,11 +128,17 @@ const Home: NextPage = () => {
         )}
       </div>
       <main className="flex flex-1 w-full flex-col items-center justify-center text-center px-4 mt-12 sm:text sm:mt-20">
-        <h1 className="sm:text-9xl text-[#efece6] text-7xl max-w-[708px] font-bold">
-          Jst Web
-        </h1>
+        <Image
+          src="https://uploads-ssl.webflow.com/6414ec5868f1abfe4d565feb/644be354197fb6c603bc6fe4_Group%202233.svg"
+          alt="Example image"
+          width={200}
+          height={500}
+        />
         <div className="max-w-xl w-full">
-          <div className="flex mt-5 items-center space-x-1"></div>
+          <div className="flex mt-5 items-center space-x-1">
+            Pls provide your OpenAI key on the upper part and then you can start
+            creating webpages!
+          </div>
         </div>
         <Toaster
           position="top-center"
@@ -141,36 +148,46 @@ const Home: NextPage = () => {
         <hr className="h-px bg-gray-700 border-1 dark:bg-gray-700" />
         <div className="w-full space-y-10 my-5">
           {generatedBios && (
-            <iframe
-              className="w-full h-screen bg-white p-8 rounded-2xl"
-              srcDoc={generatedBios.substring(
-                generatedBios.indexOf("```") + 3,
-                generatedBios.indexOf("```", generatedBios.indexOf("```") + 1)
-              )}
-            />
+            <>
+              <iframe
+                className="w-full h-screen bg-white p-8 rounded-2xl"
+                srcDoc={generatedBios.substring(
+                  generatedBios.indexOf("```") + 3,
+                  generatedBios.indexOf("```", generatedBios.indexOf("```") + 1)
+                )}
+              />
+              <button
+                onClick={() => {
+                  navigator.clipboard.writeText(generatedBios.toString());
+                  toast("Copied to clipboard");
+                }}
+              >
+                Copy
+              </button>
+            </>
           )}
         </div>
       </main>
       <footer className="fixed min-w-[50%] pt-0 bottom-0 flex justify-center pb-2">
-        <div className="p-1.5 w-full gap-1 rounded-full text-[#efece6] py-2 border border-solid border-[#00000033] rounded-full bg-[#333] shadow-[inset_0_1px_0_0_rgb(255,255,255,10%)] flex">
+        <div className="p-1.5 w-full gap-1 rounded-full text-[#d7d6d3] py-2 border border-solid border-[#00000033] rounded-full bg-[#333] shadow-[inset_0_1px_0_0_rgb(255,255,255,10%)] flex">
           <input
             value={bio}
             onChange={(e) => setBio(e.target.value)}
-            className="w-full text-[#efece6] placeholder:text-[#aaa] bg-transparent px-3 py-2 rounded-full focus:outline-none focus:border-sky-500"
-            placeholder={"Roast Me"}
+            className="w-full text-[#d7d6d3] placeholder:text-[#B1AFA9] placeholder:italic bg-transparent px-3 py-2 rounded-full focus:outline-none focus:border-sky-500"
+            placeholder={"Create a website for..."}
           />
 
           {!loading && (
             <button
-              className="bg-[#222] shadow-[inset_0_2px_0_0_rgb(255,255,255,10%)] border border-[#000] rounded-full text-white font-medium px-4 py-2 hover:bg-[#222] w-fit"
+              className="bg-[#FD330A] shadow-[inset_0_2px_0_0_rgb(255,255,255,10%)] border border-[#B62002] rounded-full text-white font-medium px-4 py-2 w-fit"
               onClick={(e) => generateBio(e)}
             >
-              Roast
+              Create
             </button>
           )}
           {loading && (
             <button
-              className="bg-[#222] shadow-[inset_0_2px_0_0_rgb(255,255,255,10%)] border border-[#000] rounded-full text-white font-medium px-4 py-2 hover:bg-[#222] w-fit"
+              className="bg-[#FD330A] shadow-[inset_0_2px_0_0_rgb(255,255,255,10%)] border border-[#B62002] rounded-full text-white font-medium px-4 py-2 w-fit"
               disabled
             >
               <LoadingDots color="white" style="large" />
