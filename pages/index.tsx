@@ -140,10 +140,10 @@ const Home: NextPage = () => {
         <hr className="h-px bg-gray-700 border-1 dark:bg-gray-700" />
         <div className="space-y-10 my-5">
           {generatedBios && (
-            <div
+            <iframe
               className="space-y-8 flex flex-col bg-[#ffffff0a] p-8 rounded-2xl text-[#ffffffcc]"
               dangerouslySetInnerHTML={{ __html: generatedBios.toString() }}
-            ></div>
+            ></iframe>
           )}
         </div>
       </main>
