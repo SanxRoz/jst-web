@@ -6,15 +6,9 @@ class MyDocument extends Document {
       <Html lang="en">
         <Head>
           <link rel="icon" href="/favicon.ico" />
-          <meta
-            name="description"
-            content="Roast you idea Now"
-          />
+          <meta name="description" content="Roast you idea Now" />
           <meta property="og:site_name" content="twitterbio.com" />
-          <meta
-            property="og:description"
-            content="Roast your ideas"
-          />
+          <meta property="og:description" content="Roast your ideas" />
           <meta property="og:title" content="Jst Ideas" />
           <meta name="twitter:card" content="summary_large_image" />
           <meta name="twitter:title" content="Jst Ideas" />
@@ -29,6 +23,16 @@ class MyDocument extends Document {
           <meta
             name="twitter:image"
             content="https://twitterbio.com/og-image.png"
+          />
+          <link rel="preconnect" href="https://fonts.googleapis.com" />
+          <link
+            rel="preconnect"
+            href="https://fonts.gstatic.com"
+            crossOrigin="anonymous"
+          />
+          <link
+            href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap"
+            rel="stylesheet"
           />
         </Head>
         <body>

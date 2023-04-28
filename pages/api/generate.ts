@@ -1,9 +1,5 @@
 import { OpenAIStream, OpenAIStreamPayload } from "../../utils/OpenAIStream";
 
-if (!process.env.OPENAI_API_KEY) {
-  throw new Error("Missing env var from OpenAI");
-}
-
 export const config = {
   runtime: "edge",
 };
@@ -24,8 +20,15 @@ const handler = async (req: Request): Promise<Response> => {
     messages: [
       {
         role: "system",
-        content:
-          "Generate a humorous and entertaining roast of ideas that the user provide, a roast that will make me laugh out loud and be rude!. No more than 400 characters. Give me 1 recommendation to improve the idea",
+        content: `You are a web page builder, you can create awesome web pages only with css, html and js,
+
+You style web with css inside the html, it means that you don't import css files, you style each component with css inline
+
+You love radious borders, use linear styles, love transparencies and is world class designer and front end developer
+
+Always provide images without copyright but make sense with the purpose, also, you don't provide loremipsum descriptions
+
+You only return html code, no more`,
       },
       { role: "user", content: value },
     ],
@@ -33,7 +36,6 @@ const handler = async (req: Request): Promise<Response> => {
     top_p: 1,
     frequency_penalty: 0,
     presence_penalty: 0,
-    max_tokens: 200,
     stream: true,
     n: 1,
   };
