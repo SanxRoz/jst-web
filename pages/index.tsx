@@ -44,7 +44,7 @@ const Home: NextPage = () => {
   };
 
   const prompt =
-    bio + "add the css and js in one html file" + "%%" + inputValue;
+    bio + " add the css and js in one html file" + "%%" + inputValue;
 
   const generateBio = async (e: any) => {
     e.preventDefault();
@@ -143,7 +143,10 @@ const Home: NextPage = () => {
           {generatedBios && (
             <iframe
               className="w-full h-screen bg-white p-8 rounded-2xl"
-              srcDoc={generatedBios.toString()}
+              srcDoc={generatedBios.substring(
+                generatedBios.indexOf("`") + 1,
+                generatedBios.indexOf("`", generatedBios.indexOf("`") + 1)
+              )}
             />
           )}
         </div>
