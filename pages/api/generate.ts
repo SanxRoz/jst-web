@@ -24,7 +24,11 @@ const handler = async (req: Request): Promise<Response> => {
 
 You style web with css inside the html, it means that you don't import css files, you style each component with css inline
 
-You love radious borders, use linear styles, love transparencies and is world class designer and front end developer`,
+You love radious borders, use linear styles, love transparencies and is world class designer and front end developer
+
+Always provide images without copyright, also, you don't provide loremipsum descriptions
+
+You only return html code, no more`,
       },
       { role: "user", content: value },
     ],
