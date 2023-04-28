@@ -195,10 +195,7 @@ const Home: NextPage = () => {
               </button>
               <iframe
                 className="w-full h-screen bg-[#d7d6d3] p-8 rounded-2xl"
-                srcDoc={generatedBios.substring(
-                  generatedBios.indexOf("```") + 3,
-                  generatedBios.indexOf("```", generatedBios.indexOf("```") + 1)
-                )}
+                srcDoc={generatedBios.toString()}
               />
             </>
           )}
