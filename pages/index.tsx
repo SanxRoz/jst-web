@@ -43,7 +43,8 @@ const Home: NextPage = () => {
     }
   };
 
-  const prompt = bio + "%%" + inputValue;
+  const prompt =
+    bio + "add the css and js in one html file" + "%%" + inputValue;
 
   const generateBio = async (e: any) => {
     e.preventDefault();
@@ -138,10 +139,10 @@ const Home: NextPage = () => {
           toastOptions={{ duration: 2000 }}
         />
         <hr className="h-px bg-gray-700 border-1 dark:bg-gray-700" />
-        <div className="space-y-10 my-5">
+        <div className="w-full space-y-10 my-5">
           {generatedBios && (
             <iframe
-              className="bg-white p-8 rounded-2xl"
+              className="w-full h-screen bg-white p-8 rounded-2xl"
               srcDoc={generatedBios.toString()}
             />
           )}
