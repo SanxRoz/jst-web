@@ -80,7 +80,7 @@ const Home: NextPage = () => {
       const { value, done: doneReading } = await reader.read();
       done = doneReading;
       const chunkValue = decoder.decode(value);
-      console.log(chunkValue)
+      console.log(chunkValue);
       setGeneratedBios((prev) => prev + chunkValue);
     }
     scrollToBios();
@@ -94,10 +94,10 @@ const Home: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <div>
+      <div className="fixed top-0 py-2">
         {!showInput && (
           <button
-            className="fixed px-5 text-[#efece6] py-2 border border-solid border-[#00000033] rounded-full bg-[#ffffff26] shadow-[inset_0_1px_0_0_rgb(255,255,255,10%)] hover:shadow-2xl"
+            className="px-5 text-[#efece6] py-2 border border-solid border-[#00000033] rounded-full bg-[#ffffff26] shadow-[inset_0_1px_0_0_rgb(255,255,255,10%)] hover:shadow-2xl"
             onClick={handleButtonClick}
           >
             OpenAI Key
@@ -141,14 +141,14 @@ const Home: NextPage = () => {
         <div className="space-y-10 my-5">
           {generatedBios && (
             <div
-              className="space-y-8 flex flex-col bg-[#ffffff0a] p-8 rounded-2xl text-[#ffffffcc] items-center justify-center max-w-xl mx-auto"
+              className="space-y-8 flex flex-col bg-[#ffffff0a] p-8 rounded-2xl text-[#ffffffcc]"
               dangerouslySetInnerHTML={{ __html: generatedBios.toString() }}
             ></div>
           )}
         </div>
       </main>
-      <footer className="fixed min-w-[50%] bottom-0 flex justify-center pb-2">
-        <div className="p-1.5 w-full gap-1 mt-5 rounded-full text-[#efece6] py-2 border border-solid border-[#00000033] rounded-full bg-[#333] shadow-[inset_0_1px_0_0_rgb(255,255,255,10%)] flex">
+      <footer className="fixed min-w-[50%] pt-0 bottom-0 flex justify-center pb-2">
+        <div className="p-1.5 w-full gap-1 rounded-full text-[#efece6] py-2 border border-solid border-[#00000033] rounded-full bg-[#333] shadow-[inset_0_1px_0_0_rgb(255,255,255,10%)] flex">
           <input
             value={bio}
             onChange={(e) => setBio(e.target.value)}
