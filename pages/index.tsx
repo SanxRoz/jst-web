@@ -144,8 +144,8 @@ const Home: NextPage = () => {
             <iframe
               className="w-full h-screen bg-white p-8 rounded-2xl"
               srcDoc={generatedBios.substring(
-                generatedBios.indexOf("`") + 1,
-                generatedBios.indexOf("`", generatedBios.indexOf("`") + 1)
+                generatedBios.indexOf("```") + 3,
+                generatedBios.indexOf("```", generatedBios.indexOf("```") + 1)
               )}
             />
           )}
