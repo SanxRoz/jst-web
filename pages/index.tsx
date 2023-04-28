@@ -141,9 +141,9 @@ const Home: NextPage = () => {
         <div className="space-y-10 my-5">
           {generatedBios && (
             <iframe
-              className="space-y-8 flex flex-col bg-[#ffffff0a] p-8 rounded-2xl text-[#ffffffcc]"
-              dangerouslySetInnerHTML={{ __html: generatedBios.toString() }}
-            ></iframe>
+              className="bg-white p-8 rounded-2xl"
+              srcDoc={generatedBios.toString()}
+            />
           )}
         </div>
       </main>
