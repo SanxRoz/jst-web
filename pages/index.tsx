@@ -146,7 +146,7 @@ const Home: NextPage = () => {
           toastOptions={{ duration: 2000 }}
         />
         <hr className="h-px bg-gray-700 border-1 dark:bg-gray-700" />
-        <div className="w-[60%] space-y-10 my-5">
+        <div className="w-[60%] space-y-5 mb-16 mt-5">
           {generatedBios && (
             <>
               <button
