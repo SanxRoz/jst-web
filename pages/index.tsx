@@ -96,7 +96,7 @@ const Home: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <div className="fixed top-0 py-2">
+      <div className="absolute top-0 py-2">
         {!showInput && (
           <button
             className="px-5 text-[#d7d6d3] py-2 border border-solid border-[#00000033] rounded-full bg-[#ffffff26] shadow-[inset_0_1px_0_0_rgb(255,255,255,10%)] hover:shadow-2xl"
@@ -131,7 +131,7 @@ const Home: NextPage = () => {
         <Image
           src="https://uploads-ssl.webflow.com/6414ec5868f1abfe4d565feb/644be354197fb6c603bc6fe4_Group%202233.svg"
           alt="Example image"
-          width={200}
+          width={300}
           height={500}
         />
         <div className="max-w-xl w-full">
@@ -150,7 +150,7 @@ const Home: NextPage = () => {
           {generatedBios && (
             <>
               <iframe
-                className="w-full h-screen bg-white p-8 rounded-2xl"
+                className="w-full h-screen bg-[#d7d6d3] p-8 rounded-2xl"
                 srcDoc={generatedBios.substring(
                   generatedBios.indexOf("```") + 3,
                   generatedBios.indexOf("```", generatedBios.indexOf("```") + 1)
