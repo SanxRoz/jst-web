@@ -12,7 +12,6 @@ const Home: NextPage = () => {
   const [generatedBios, setGeneratedBios] = useState<String>("");
   const [inputValue, setInputValue] = useState("");
   const [showInput, setShowInput] = useState(false);
-  const [submitted, setSubmitted] = useState(false);
 
   useEffect(() => {
     if (typeof window !== "undefined") {
@@ -52,7 +51,6 @@ const Home: NextPage = () => {
   const generateBio = async (e: any) => {
     e.preventDefault();
     setGeneratedBios("");
-    setSubmitted(true);
     setLoading(true);
 
     console.log(prompt);
@@ -91,8 +89,6 @@ const Home: NextPage = () => {
     scrollToBios();
     setLoading(false);
   };
-
-  const footerStyles: CSSProperties = submitted ? { position: "fixed" } : {};
 
   return (
     <div className="flex max-w-5xl mx-auto flex-col items-center justify-center py-2 min-h-screen">
@@ -145,43 +141,41 @@ const Home: NextPage = () => {
             creating webpages!
           </div>
         </div>
-        <footer
-          className="min-w-[50%] mt-5 pt-0 bottom-0 flex justify-center pb-2"
-          style={footerStyles}
-        >
-          <div className="p-1.5 w-full gap-1 rounded-full text-[#d7d6d3] py-2 border border-solid border-[#00000033] rounded-full bg-[#333] shadow-[inset_0_1px_0_0_rgb(255,255,255,10%)] flex">
-            <input
-              value={bio}
-              onChange={(e) => setBio(e.target.value)}
-              className="w-full text-[#d7d6d3] placeholder:text-[#B1AFA9] placeholder:italic bg-transparent px-3 py-2 rounded-full focus:outline-none focus:border-sky-500"
-              placeholder={"Create a website for..."}
-            />
 
-            {!loading && (
-              <button
-                className="bg-[#FD330A] shadow-[inset_0_2px_0_0_rgb(255,255,255,10%)] border border-[#B62002] rounded-full text-white font-medium px-4 py-2 w-fit"
-                onClick={(e) => generateBio(e)}
-              >
-                Create
-              </button>
-            )}
-            {loading && (
-              <button
-                className="bg-[#FD330A] shadow-[inset_0_2px_0_0_rgb(255,255,255,10%)] border border-[#B62002] rounded-full text-white font-medium px-4 py-2 w-fit"
-                disabled
-              >
-                <LoadingDots color="white" style="large" />
-              </button>
-            )}
-          </div>
-        </footer>
         <Toaster
           position="top-center"
           reverseOrder={false}
           toastOptions={{ duration: 2000 }}
         />
         <hr className="h-px bg-gray-700 border-1 dark:bg-gray-700" />
-        <div className="w-[60%] space-y-5 mb-16 mt-5">
+        <div className="flex w-[100%] justify-center space-y-5 mb-16 mt-5">
+          <footer className="min-w-[60%] mt-5 pt-0 bottom-0 flex justify-center pb-2">
+            <div className="p-1.5 w-full gap-1 rounded-full text-[#d7d6d3] py-2 border border-solid border-[#00000033] rounded-full bg-[#333] shadow-[inset_0_1px_0_0_rgb(255,255,255,10%)] flex">
+              <input
+                value={bio}
+                onChange={(e) => setBio(e.target.value)}
+                className="w-full text-[#d7d6d3] placeholder:text-[#B1AFA9] placeholder:italic bg-transparent px-3 py-2 rounded-full focus:outline-none focus:border-sky-500"
+                placeholder={"Create a website for..."}
+              />
+
+              {!loading && (
+                <button
+                  className="bg-[#FD330A] shadow-[inset_0_2px_0_0_rgb(255,255,255,10%)] border border-[#B62002] rounded-full text-white font-medium px-4 py-2 w-fit"
+                  onClick={(e) => generateBio(e)}
+                >
+                  Create
+                </button>
+              )}
+              {loading && (
+                <button
+                  className="bg-[#FD330A] shadow-[inset_0_2px_0_0_rgb(255,255,255,10%)] border border-[#B62002] rounded-full text-white font-medium px-4 py-2 w-fit"
+                  disabled
+                >
+                  <LoadingDots color="white" style="large" />
+                </button>
+              )}
+            </div>
+          </footer>
           {generatedBios && (
             <>
               <button
