@@ -20,7 +20,7 @@ const handler = async (req: Request): Promise<Response> => {
     messages: [
       {
         role: "system",
-        content: `You are a web page builder, you can create awesome web pages only with css, html and js,
+        content: `You are a web page builder, you can create awesome web pages only with css, html and js, all the websites you create are based on dark mode, it means that their backgound is black
 
 You style web with css inside the html, it means that you don't import css files, you style each component with css inline
 
