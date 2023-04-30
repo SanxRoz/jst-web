@@ -80,12 +80,36 @@ const Home: NextPage = () => {
     const reader = data.getReader();
     const decoder = new TextDecoder();
     let done = false;
+    let insideBlock = false;
+    let blockStartIndex = -1;
+    let biosChunks = "";
 
     while (!done) {
       const { value, done: doneReading } = await reader.read();
       done = doneReading;
       const chunkValue = decoder.decode(value);
-      setGeneratedBios((prev) => prev + chunkValue);
+
+      if (!insideBlock) {
+        const blockStart = chunkValue.indexOf("```");
+        if (blockStart !== -1) {
+          insideBlock = true;
+          blockStartIndex = blockStart;
+        }
+      }
+
+      if (insideBlock) {
+        const blockEnd = chunkValue.indexOf("```", blockStartIndex + 3);
+        if (blockEnd !== -1) {
+          insideBlock = false;
+          biosChunks += chunkValue.slice(blockStartIndex + 3, blockEnd);
+          setGeneratedBios((prev) => prev + biosChunks);
+          biosChunks = "";
+        } else {
+          biosChunks += chunkValue.slice(blockStartIndex + 3);
+        }
+      } else {
+        setGeneratedBios((prev) => prev + chunkValue);
+      }
     }
 
     scrollToBios();
