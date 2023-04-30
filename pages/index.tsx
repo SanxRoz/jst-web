@@ -148,11 +148,11 @@ const Home: NextPage = () => {
         />
         <hr className="h-px bg-gray-700 border-1 dark:bg-gray-700" />
         <div className="flex flex-row-reverse gap-3 w-[100%] justify-center mb-8">
-          <div className="w-full justify-center bottom-0 left-0 gap-3 px-2 flex pb-2">
-            <footer
-              className="md:max-w-[50%] w-full pt-0 flex justify-center"
-              style={footerStyles}
-            >
+          <div
+            className="w-full justify-center bottom-0 left-0 gap-3 px-2 flex pb-2"
+            style={footerStyles}
+          >
+            <footer className="md:max-w-[50%] w-full pt-0 flex justify-center">
               <div className="p-1.5 w-full gap-1 rounded-full py-2 border border-solid border-[#00000033] rounded-full bg-[#333] shadow-[inset_0_1px_0_0_rgb(255,255,255,10%)] flex">
                 <input
                   value={bio}
@@ -196,7 +196,10 @@ const Home: NextPage = () => {
 
           {generatedBios && (
             <div className="w-[70%] mb-[4rem] border border-[#ffffff26] h-screen bg-[#ffffff1a] p-8 m-0 rounded-2xl">
-              <iframe className="" srcDoc={generatedBios.toString()} />
+              <iframe
+                className="w-full h-full"
+                srcDoc={generatedBios.toString()}
+              />
             </div>
           )}
         </div>
