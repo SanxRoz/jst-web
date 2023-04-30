@@ -81,13 +81,24 @@ const Home: NextPage = () => {
     const decoder = new TextDecoder();
     let done = false;
 
+    const regex = /```([\s\S]*?)```/g; // define the regular expression to match the text between the ``` characters
+    let bios = ""; // initialize an empty string to hold the extracted text
+    let match;
+
     while (!done) {
       const { value, done: doneReading } = await reader.read();
       done = doneReading;
       const chunkValue = decoder.decode(value);
       console.log(chunkValue);
-      setGeneratedBios((prev) => prev + chunkValue);
+      bios += chunkValue; // add the chunkValue to the bios string
+      while ((match = regex.exec(bios))) {
+        // loop through all the matches
+        const extractedText = match[1]; // get the text between the ``` characters
+        console.log(extractedText); // do something with the extracted text, e.g. save it to state
+        setGeneratedBios((prev) => prev + extractedText);
+      }
     }
+
     scrollToBios();
     setLoading(false);
   };
