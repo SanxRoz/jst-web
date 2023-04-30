@@ -91,7 +91,7 @@ const Home: NextPage = () => {
   };
 
   return (
-    <div className="flex max-w-5xl mx-auto flex-col items-center justify-center py-2 min-h-screen">
+    <div className="flex px-[3%] mx-auto flex-col items-center justify-center py-2 min-h-screen">
       <Head>
         <title>Jst Web</title>
         <link rel="icon" href="/favicon.ico" />
@@ -100,7 +100,7 @@ const Home: NextPage = () => {
       <div className="absolute top-0 py-2">
         {!showInput && (
           <button
-            className="px-5 text-[#d7d6d3] py-2 border border-solid border-[#00000033] rounded-full bg-[#ffffff26] shadow-[inset_0_1px_0_0_rgb(255,255,255,10%)] hover:shadow-2xl"
+            className="px-5 py-2 border border-solid border-[#00000033] rounded-full bg-[#ffffff26] shadow-[inset_0_1px_0_0_rgb(255,255,255,10%)] hover:shadow-2xl"
             onClick={handleButtonClick}
           >
             OpenAI Key
@@ -108,11 +108,11 @@ const Home: NextPage = () => {
         )}
         {showInput && (
           <form
-            className="p-1.5 gap-1 rounded-full text-[#d7d6d3] py-2 border border-solid border-[#00000033] rounded-full bg-[#ffffff26] shadow-[inset_0_1px_0_0_rgb(255,255,255,10%)] flex"
+            className="p-1.5 gap-1 rounded-full py-2 border border-solid border-[#00000033] rounded-full bg-[#ffffff26] shadow-[inset_0_1px_0_0_rgb(255,255,255,10%)] flex"
             onSubmit={handleSubmit}
           >
             <input
-              className="w-full border-0 text-[#d7d6d3] placeholder:text-[#aaa] bg-transparent px-3 py-2 rounded-full focus:outline-none focus:border-0"
+              className="w-full border-0 placeholder:text-[#aaa] bg-transparent px-3 py-2 rounded-full focus:outline-none focus:border-0"
               id="input"
               type="password"
               value={inputValue}
@@ -129,14 +129,8 @@ const Home: NextPage = () => {
         )}
       </div>
       <main className="flex flex-1 w-full flex-col items-center justify-center text-center px-4 mt-12 sm:text sm:mt-20">
-        <Image
-          src="https://uploads-ssl.webflow.com/6414ec5868f1abfe4d565feb/644be354197fb6c603bc6fe4_Group%202233.svg"
-          alt="Example image"
-          width={300}
-          height={500}
-        />
         <div className="max-w-xl w-full">
-          <div className="flex mt-5 items-center space-x-1">
+          <div className="flex font-medium my-5 items-center space-x-1">
             Pls provide your OpenAI key on the upper part and then you can start
             creating webpages!
           </div>
@@ -148,50 +142,54 @@ const Home: NextPage = () => {
           toastOptions={{ duration: 2000 }}
         />
         <hr className="h-px bg-gray-700 border-1 dark:bg-gray-700" />
-        <div className="flex w-[100%] justify-center space-y-5 mb-16 mt-5">
-          <footer className="min-w-[60%] mt-5 pt-0 bottom-0 flex justify-center pb-2">
-            <div className="p-1.5 w-full gap-1 rounded-full text-[#d7d6d3] py-2 border border-solid border-[#00000033] rounded-full bg-[#333] shadow-[inset_0_1px_0_0_rgb(255,255,255,10%)] flex">
-              <input
-                value={bio}
-                onChange={(e) => setBio(e.target.value)}
-                className="w-full text-[#d7d6d3] placeholder:text-[#B1AFA9] placeholder:italic bg-transparent px-3 py-2 rounded-full focus:outline-none focus:border-sky-500"
-                placeholder={"Create a website for..."}
-              />
+        <div className="flex flex-row-reverse gap-3 w-[100%] justify-center mb-8">
+          <div className=" w-full justify-center bottom-0 left-0 gap-3 px-2 flex pb-2">
+            <footer className="min-w-[60%] pt-0 flex justify-center">
+              <div className="p-1.5 w-full gap-1 rounded-full py-2 border border-solid border-[#00000033] rounded-full bg-[#333] shadow-[inset_0_1px_0_0_rgb(255,255,255,10%)] flex">
+                <input
+                  value={bio}
+                  onChange={(e) => setBio(e.target.value)}
+                  className="w-full placeholder:text-[#B1AFA9] placeholder:italic bg-transparent px-3 py-2 rounded-full focus:outline-none focus:border-sky-500"
+                  placeholder={"Create a website for..."}
+                />
 
-              {!loading && (
+                {!loading && (
+                  <button
+                    className="bg-[#FD330A] shadow-[inset_0_2px_0_0_rgb(255,255,255,10%)] border border-[#B62002] rounded-full text-white font-medium px-4 py-2 w-fit"
+                    onClick={(e) => generateBio(e)}
+                  >
+                    Create
+                  </button>
+                )}
+                {loading && (
+                  <button
+                    className="bg-[#FD330A] shadow-[inset_0_2px_0_0_rgb(255,255,255,10%)] border border-[#B62002] rounded-full text-white font-medium px-4 py-2 w-fit"
+                    disabled
+                  >
+                    <LoadingDots color="white" style="large" />
+                  </button>
+                )}
+              </div>
+            </footer>
+            {generatedBios && (
+              <div className="p-1.5 gap-1 rounded-full py-2 border border-solid border-[#00000033] rounded-full bg-[#333] shadow-[inset_0_1px_0_0_rgb(255,255,255,10%)] flex">
                 <button
-                  className="bg-[#FD330A] shadow-[inset_0_2px_0_0_rgb(255,255,255,10%)] border border-[#B62002] rounded-full text-white font-medium px-4 py-2 w-fit"
-                  onClick={(e) => generateBio(e)}
+                  className="bg-[#FD330A] shadow-[inset_0_2px_0_0_rgb(255,255,255,10%)] border border-[#B62002] rounded-full text-white font-medium px-4 py-2 w-full"
+                  onClick={() => {
+                    navigator.clipboard.writeText(generatedBios.toString());
+                    toast("Copied to clipboard");
+                  }}
                 >
-                  Create
+                  Copy
                 </button>
-              )}
-              {loading && (
-                <button
-                  className="bg-[#FD330A] shadow-[inset_0_2px_0_0_rgb(255,255,255,10%)] border border-[#B62002] rounded-full text-white font-medium px-4 py-2 w-fit"
-                  disabled
-                >
-                  <LoadingDots color="white" style="large" />
-                </button>
-              )}
-            </div>
-          </footer>
+              </div>
+            )}
+          </div>
+
           {generatedBios && (
-            <>
-              <button
-                className="bg-[#FD330A] shadow-[inset_0_2px_0_0_rgb(255,255,255,10%)] border border-[#B62002] rounded-full text-white font-medium px-4 py-2 w-full"
-                onClick={() => {
-                  navigator.clipboard.writeText(generatedBios.toString());
-                  toast("Copied to clipboard");
-                }}
-              >
-                Copy
-              </button>
-              <iframe
-                className="w-full h-screen bg-[#d7d6d3] p-8 rounded-2xl"
-                srcDoc={generatedBios.toString()}
-              />
-            </>
+            <div className="w-[70%] mb-[4rem] border border-[#ffffff26] h-screen bg-[#ffffff1a] p-8 m-0 rounded-2xl">
+              <iframe className="" srcDoc={generatedBios.toString()} />
+            </div>
           )}
         </div>
       </main>
