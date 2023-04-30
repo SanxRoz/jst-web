@@ -80,25 +80,38 @@ const Home: NextPage = () => {
     const reader = data.getReader();
     const decoder = new TextDecoder();
     let done = false;
-    let insideBackticks = false;
-    let generatedBio = "";
+    let buffer = "";
+    let foundFirstDelimiter = false;
+    let foundSecondDelimiter = false;
 
     while (!done) {
       const { value, done: doneReading } = await reader.read();
       done = doneReading;
       const chunkValue = decoder.decode(value);
+      buffer += chunkValue;
 
-      // Check if chunk contains backticks and switch insideBackticks
-      if (chunkValue.includes("```")) {
-        insideBackticks = !insideBackticks;
+      // Look for the first delimiter
+      if (!foundFirstDelimiter) {
+        const firstDelimiterIndex = buffer.indexOf("```");
+        if (firstDelimiterIndex >= 0) {
+          // Remove the data before the first delimiter
+          buffer = buffer.slice(firstDelimiterIndex + 3);
+          foundFirstDelimiter = true;
+        }
       }
 
-      // If inside backticks append chunk to generatedBio
-      if (insideBackticks) {
-        generatedBio += chunkValue;
+      // Look for the second delimiter
+      if (foundFirstDelimiter && !foundSecondDelimiter) {
+        const secondDelimiterIndex = buffer.indexOf("```");
+        if (secondDelimiterIndex >= 0) {
+          // Print the data between the delimiters
+          const data = buffer.slice(0, secondDelimiterIndex);
+          console.log(data);
+          setGeneratedBios(data);
+          foundSecondDelimiter = true;
+          break;
+        }
       }
-
-      setGeneratedBios(generatedBio);
     }
 
     scrollToBios();
