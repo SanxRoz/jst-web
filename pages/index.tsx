@@ -81,29 +81,11 @@ const Home: NextPage = () => {
     const decoder = new TextDecoder();
     let done = false;
 
-    let count = 0;
     while (!done) {
       const { value, done: doneReading } = await reader.read();
       done = doneReading;
       const chunkValue = decoder.decode(value);
-      const startIndex = chunkValue.indexOf("```");
-      if (startIndex !== -1) {
-        count++;
-        if (count === 1) {
-          const endIndex = chunkValue.indexOf("```", startIndex + 3);
-          if (endIndex !== -1) {
-            const text = chunkValue.substring(startIndex + 3, endIndex);
-            setGeneratedBios(text);
-            break;
-          }
-          const text = chunkValue.substring(startIndex + 3);
-          setGeneratedBios(text);
-        } else {
-          break;
-        }
-      } else if (count === 1) {
-        setGeneratedBios((prev) => prev + chunkValue);
-      }
+      setGeneratedBios((prev) => prev + chunkValue);
     }
 
     scrollToBios();
