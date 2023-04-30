@@ -80,30 +80,41 @@ const Home: NextPage = () => {
     const reader = data.getReader();
     const decoder = new TextDecoder();
     let done = false;
-    let insideBackticks = false;
     let buffer = "";
+    let foundFirstDelimiter = false;
+    let foundSecondDelimiter = false;
 
     while (!done) {
       const { value, done: doneReading } = await reader.read();
       done = doneReading;
       const chunkValue = decoder.decode(value);
       buffer += chunkValue;
-      let index = buffer.indexOf("```");
-      while (index !== -1) {
-        if (!insideBackticks) {
-          insideBackticks = true;
-          buffer = buffer.substring(index + 3);
-        } else {
-          const content = buffer.substring(0, index);
-          setGeneratedBios((prev) => prev + content);
-          insideBackticks = false;
-          buffer = buffer.substring(index + 3);
-          scrollToBios();
+
+      // Look for the first delimiter
+      if (!foundFirstDelimiter) {
+        const firstDelimiterIndex = buffer.indexOf("```");
+        if (firstDelimiterIndex >= 0) {
+          // Remove the data before the first delimiter
+          buffer = buffer.slice(firstDelimiterIndex + 3);
+          foundFirstDelimiter = true;
         }
-        index = buffer.indexOf("```");
+      }
+
+      // Look for the second delimiter
+      if (foundFirstDelimiter && !foundSecondDelimiter) {
+        const secondDelimiterIndex = buffer.indexOf("```");
+        if (secondDelimiterIndex >= 0) {
+          // Print the data between the delimiters
+          const data = buffer.slice(0, secondDelimiterIndex);
+          console.log(data);
+          setGeneratedBios(data);
+          foundSecondDelimiter = true;
+          break;
+        }
       }
     }
 
+    scrollToBios();
     setLoading(false);
   };
 
