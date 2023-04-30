@@ -95,7 +95,7 @@ const Home: NextPage = () => {
         const firstDelimiterIndex = buffer.indexOf("```");
         if (firstDelimiterIndex >= 0) {
           // Remove the data before the first delimiter
-          buffer = buffer.slice(firstDelimiterIndex + 7);
+          buffer = buffer.slice(firstDelimiterIndex + 6);
           foundFirstDelimiter = true;
         }
       }
