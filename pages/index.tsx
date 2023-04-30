@@ -80,29 +80,14 @@ const Home: NextPage = () => {
     const reader = data.getReader();
     const decoder = new TextDecoder();
     let done = false;
-    let insideDelimiter = false; // Flag to keep track of whether we are inside the delimiter or not
-    let generatedBio = ""; // String to accumulate the generated bio between delimiters
 
     while (!done) {
       const { value, done: doneReading } = await reader.read();
       done = doneReading;
       const chunkValue = decoder.decode(value);
-
-      for (let i = 0; i < chunkValue.length; i++) {
-        const char = chunkValue[i];
-
-        if (char === "`" && chunkValue.slice(i, i + 3) === "```") {
-          // Found closing delimiter
-          insideDelimiter = !insideDelimiter; // Toggle the flag
-          i += 2; // Skip over the remaining two delimiter characters
-        } else if (insideDelimiter) {
-          // Currently inside the delimiter
-          generatedBio += char;
-        }
-      }
+      console.log(chunkValue);
+      setGeneratedBios((prev) => prev + chunkValue);
     }
-
-    setGeneratedBios((prev) => prev + generatedBio); // Save the generated bio
 
     scrollToBios();
     setLoading(false);
