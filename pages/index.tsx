@@ -5,6 +5,7 @@ import { useRef, useState, useEffect } from "react";
 import { Toaster, toast } from "react-hot-toast";
 import LoadingDots from "../components/LoadingDots";
 import Image from "next/image";
+import { PlusCircle } from "@phosphor-icons/react";
 
 const Home: NextPage = () => {
   const [loading, setLoading] = useState(false);
@@ -13,6 +14,17 @@ const Home: NextPage = () => {
   const [inputValue, setInputValue] = useState("");
   const [showInput, setShowInput] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+  const [showAdditionalInput, setShowAdditionalInput] = useState(false);
+  const [additionalBio, setAdditionalBio] = useState("");
+
+  function handleAdditionalBioChange(e: React.ChangeEvent<HTMLInputElement>) {
+    setAdditionalBio(e.target.value);
+    console.log(additionalBio);
+  }
+
+  function handleAddMoreClick() {
+    setShowAdditionalInput(true);
+  }
 
   useEffect(() => {
     if (typeof window !== "undefined") {
@@ -47,7 +59,12 @@ const Home: NextPage = () => {
   };
 
   const prompt =
-    bio + " add the css and js in one html file" + "%%" + inputValue;
+    bio +
+    " add the css and js in one html file" +
+    " Add these links to the website " +
+    additionalBio +
+    "%%" +
+    inputValue;
 
   const generateBio = async (e: any) => {
     e.preventDefault();
@@ -179,7 +196,7 @@ const Home: NextPage = () => {
             className="w-full justify-center bottom-0 left-0 gap-3 px-2 flex pb-2"
             style={footerStyles}
           >
-            <footer className="md:max-w-[50%] w-full pt-0 flex justify-center">
+            <footer className="md:max-w-[50%] flex-col gap-2.5 w-full pt-0 items-center flex justify-center">
               <div className="p-1.5 w-full gap-1 rounded-full py-2 border border-solid border-[#00000033] rounded-full bg-[#333] shadow-[inset_0_1px_0_0_rgb(255,255,255,10%)] flex">
                 <input
                   value={bio}
@@ -205,6 +222,22 @@ const Home: NextPage = () => {
                   </button>
                 )}
               </div>
+              {showAdditionalInput && (
+                <div className="p-[1px] w-[70%] w-full gap-1 rounded-full border border-solid border-[#00000033] rounded-full bg-[#333] shadow-[inset_0_1px_0_0_rgb(255,255,255,10%)] flex">
+                  <input
+                    value={additionalBio}
+                    onChange={handleAdditionalBioChange}
+                    className="w-full placeholder:text-[#B1AFA9] placeholder:italic bg-[#333] px-3 py-2 rounded-full focus:outline-none focus:border-sky-500"
+                    placeholder={"Add links, images and more!"}
+                  />
+                </div>
+              )}
+
+              {!showAdditionalInput && (
+                <button className="" onClick={handleAddMoreClick}>
+                  <PlusCircle size={32} weight="duotone" />
+                </button>
+              )}
             </footer>
             {generatedBios && (
               <div className="p-1.5 gap-1 rounded-full py-2 border border-solid border-[#00000033] rounded-full bg-[#333] shadow-[inset_0_1px_0_0_rgb(255,255,255,10%)] flex">
