@@ -80,18 +80,31 @@ const Home: NextPage = () => {
     const reader = data.getReader();
     const decoder = new TextDecoder();
     let done = false;
+    let insideBackticks = false;
+    let generatedBio = "";
 
     while (!done) {
       const { value, done: doneReading } = await reader.read();
       done = doneReading;
       const chunkValue = decoder.decode(value);
-      console.log(chunkValue);
-      setGeneratedBios((prev) => prev + chunkValue);
+
+      // Check if chunk contains backticks and switch insideBackticks
+      if (chunkValue.includes("```")) {
+        insideBackticks = !insideBackticks;
+      }
+
+      // If inside backticks append chunk to generatedBio
+      if (insideBackticks) {
+        generatedBio += chunkValue;
+      }
+
+      setGeneratedBios(generatedBio);
     }
 
     scrollToBios();
     setLoading(false);
   };
+
   const footerStyles: CSSProperties = {
     position: submitted ? "fixed" : "static",
   };
