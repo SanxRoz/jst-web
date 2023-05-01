@@ -71,6 +71,7 @@ const Home: NextPage = () => {
     setGeneratedBios("");
     setLoading(true);
     setSubmitted(true);
+    setShowAdditionalInput(false);
 
     console.log(prompt);
 
@@ -180,8 +181,8 @@ const Home: NextPage = () => {
       <main className="flex flex-1 w-full flex-col items-center justify-center text-center px-4 mt-12 sm:text sm:mt-20">
         <div className="max-w-xl w-full">
           <div className="flex font-medium my-5 items-center space-x-1">
-            Pls provide your OpenAI key on the upper part and then you can start
-            creating webpages!
+            Provide your openAI key at the top and start creating amazing web
+            sites. Add your own images and links in the plus icon.
           </div>
         </div>
 
